@@ -40,13 +40,43 @@ public class GroupAssigner {
 
         } catch (IOException e) {
         }
+        groupAmount = students.size() / groupSize;
+        topicsPerGroup = topics.size() / groupAmount;
+    }
 
+    public boolean hasInvalidFields() {
+        return isGroupSizeInvalid() || areTopicsQuantInvalid();
+    }
+
+    private boolean isGroupSizeInvalid() {
+        if (students.size() < groupSize) {
+            System.out.printf("Error! El tamaño del grupo(%d) es mayor a la cantidad "
+                    + "total de estudiantes(%d)\n", groupSize, students.size());
+            System.out.println("Por favor intente de nuevo\n");
+            System.out.println("\n---------------------------------\n");
+            return true;
+        }
+        if (groupSize <= 0) {
+            System.out.println("Error! El tamaño del grupo debe ser mayor a 0.");
+            System.out.println("Por favor intente de nuevo\n");
+            System.out.println("\n---------------------------------\n");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean areTopicsQuantInvalid() {
+        if (topics.size() < groupAmount) {
+            System.out.printf("Error! La cantidad de temas(%d) es menor a la "
+                    + "cantidad de grupos(%d).\n", topics.size(), groupAmount);
+            System.out.println("Por favor intente de nuevo\n");
+            System.out.println("\n---------------------------------\n");
+            return true;
+        }
+        return false;
     }
 
     public List<Group> groupDivider() {
-
-        groupAmount = students.size() / groupSize;
-        topicsPerGroup = topics.size() / groupAmount;
 
         for (int i = 0; i < groupAmount; i++) {
             Group g = new Group();

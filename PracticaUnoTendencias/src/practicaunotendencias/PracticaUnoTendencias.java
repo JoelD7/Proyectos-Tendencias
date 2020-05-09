@@ -16,18 +16,22 @@ public class PracticaUnoTendencias {
         String studentFile;
         String topicsFile;
         int groupSize;
+        GroupAssigner groupAssigner;
 
-        System.out.print("Nombre archivo estudiantes: ");
-        studentFile = in.nextLine();
+        do {
+            System.out.print("Nombre archivo estudiantes: ");
+            studentFile = in.nextLine();
 
-        System.out.print("\nNombre archivo temas: ");
-        topicsFile = in.nextLine();
+            System.out.print("Nombre archivo temas: ");
+            topicsFile = in.nextLine();
 
-        System.out.println("\nTamaño de grupo: ");
-        groupSize = in.nextInt();
+            System.out.print("Tamaño de grupo: ");
+            groupSize = in.nextInt();
+            in.nextLine();
+            groupAssigner = new GroupAssigner(studentFile, topicsFile, groupSize);
+        } while (groupAssigner.hasInvalidFields());
 
-        GroupAssigner groupAsigner = new GroupAssigner(studentFile, topicsFile, groupSize);
-        List<Group> groups = groupAsigner.groupDivider();
+        List<Group> groups = groupAssigner.groupDivider();
         int i = 1;
         for (Group g : groups) {
             System.out.printf("\nGRUPO #%d:\n", i);
