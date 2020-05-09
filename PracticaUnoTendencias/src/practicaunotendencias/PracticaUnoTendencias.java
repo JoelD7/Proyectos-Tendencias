@@ -11,24 +11,29 @@ import java.util.stream.Stream;
 
 public class PracticaUnoTendencias {
 
+    static Scanner in = new Scanner(System.in);
+    static String studentFile;
+    static String topicsFile;
+    static int groupSize;
+    static GroupAssigner groupAssigner;
+    static boolean invalidFileNames = false;
+
     public static void main(String[] args) throws ClassNotFoundException, IOException {
-        Scanner in = new Scanner(System.in);
-        String studentFile;
-        String topicsFile;
-        int groupSize;
-        GroupAssigner groupAssigner;
 
         do {
-            System.out.print("Nombre archivo estudiantes: ");
-            studentFile = in.nextLine();
-
-            System.out.print("Nombre archivo temas: ");
-            topicsFile = in.nextLine();
-
-            System.out.print("Tamaño de grupo: ");
-            groupSize = in.nextInt();
-            in.nextLine();
-            groupAssigner = new GroupAssigner(studentFile, topicsFile, groupSize);
+            getUserInput();
+            while (true) {
+                try {
+                    groupAssigner = new GroupAssigner(studentFile, topicsFile, groupSize);
+                    break;
+                } catch (IOException e) {
+                    System.out.println("Uno o ambos de los archivos indicados "
+                            + "no se encontraron.");
+                    System.out.println("Por favor intente de nuevo");
+                    System.out.println("\n---------------------------------\n");
+                    getUserInput();
+                }
+            }
         } while (groupAssigner.hasInvalidFields());
 
         List<Group> groups = groupAssigner.groupDivider();
@@ -39,7 +44,18 @@ public class PracticaUnoTendencias {
             System.out.println("Temas: " + g.getTopics());
             i++;
         }
+    }
 
+    public static void getUserInput() {
+        System.out.print("Nombre archivo estudiantes: ");
+        studentFile = in.nextLine();
+
+        System.out.print("Nombre archivo temas: ");
+        topicsFile = in.nextLine();
+
+        System.out.print("Tamaño de grupo: ");
+        groupSize = in.nextInt();
+        in.nextLine();
     }
 
 }

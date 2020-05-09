@@ -20,7 +20,7 @@ public class GroupAssigner {
     private List<String> students;
     private List<String> topics;
 
-    public GroupAssigner(String studentFile, String topicsFile, int groupSize) {
+    public GroupAssigner(String studentFile, String topicsFile, int groupSize) throws IOException {
         this.groupSize = groupSize;
 
         students = new ArrayList<>();
@@ -38,7 +38,6 @@ public class GroupAssigner {
                     .map(line -> line.trim())
                     .collect(Collectors.toList());
 
-        } catch (IOException e) {
         }
         groupAmount = students.size() / groupSize;
         topicsPerGroup = topics.size() / groupAmount;
