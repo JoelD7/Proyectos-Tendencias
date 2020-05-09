@@ -20,9 +20,7 @@ public class GroupAssigner {
     private List<String> students;
     private List<String> topics;
 
-    public GroupAssigner(String studentFile, String topicsFile, int groupSize) throws IOException {
-        this.groupSize = groupSize;
-
+    public GroupAssigner(String studentFile, String topicsFile) throws IOException {
         students = new ArrayList<>();
         topics = new ArrayList<>();
         groups = new ArrayList<>();
@@ -39,15 +37,28 @@ public class GroupAssigner {
                     .collect(Collectors.toList());
 
         }
-        groupAmount = students.size() / groupSize;
-        topicsPerGroup = topics.size() / groupAmount;
     }
 
-    public boolean hasInvalidFields() {
-        return isGroupSizeInvalid() || areTopicsQuantInvalid();
+    public boolean hasInvalidFields(String groupSizeInput) {
+        return isGroupSizeInvalid(groupSizeInput) || areTopicsQuantInvalid();
     }
 
-    private boolean isGroupSizeInvalid() {
+    private boolean isGroupSizeInvalid(String groupSizeInput) {
+        int groupSize;
+
+        try {
+            groupSize = Integer.parseInt(groupSizeInput);
+        }
+            catch (NumberFormatException e)
+        {
+            System.out.println("Error! El tamaño del grupo dado no es un número entero\n");
+            System.out.println("Por favor intente de nuevo\n");
+            System.out.println("\n---------------------------------\n");
+            return true;
+        }
+
+        this.groupSize = groupSize;
+
         if (students.size() < groupSize) {
             System.out.printf("Error! El tamaño del grupo(%d) es mayor a la cantidad "
                     + "total de estudiantes(%d)\n", groupSize, students.size());
@@ -76,6 +87,8 @@ public class GroupAssigner {
     }
 
     public List<Group> groupDivider() {
+        groupAmount = students.size() / groupSize;
+        topicsPerGroup = topics.size() / groupAmount;
 
         for (int i = 0; i < groupAmount; i++) {
             Group g = new Group();

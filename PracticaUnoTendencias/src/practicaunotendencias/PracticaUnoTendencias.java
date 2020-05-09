@@ -14,7 +14,7 @@ public class PracticaUnoTendencias {
     static Scanner in = new Scanner(System.in);
     static String studentFile;
     static String topicsFile;
-    static int groupSize;
+    static String groupSize;
     static GroupAssigner groupAssigner;
     static boolean invalidFileNames = false;
 
@@ -24,7 +24,7 @@ public class PracticaUnoTendencias {
             getUserInput();
             while (true) {
                 try {
-                    groupAssigner = new GroupAssigner(studentFile, topicsFile, groupSize);
+                    groupAssigner = new GroupAssigner(studentFile, topicsFile);
                     break;
                 } catch (IOException e) {
                     System.out.println("Uno o ambos de los archivos indicados "
@@ -34,7 +34,7 @@ public class PracticaUnoTendencias {
                     getUserInput();
                 }
             }
-        } while (groupAssigner.hasInvalidFields());
+        } while (groupAssigner.hasInvalidFields(groupSize));
 
         List<Group> groups = groupAssigner.groupDivider();
         int i = 1;
@@ -54,8 +54,7 @@ public class PracticaUnoTendencias {
         topicsFile = in.nextLine();
 
         System.out.print("Tamaño de grupo: ");
-        groupSize = in.nextInt();
-        in.nextLine();
+        groupSize = in.nextLine();
     }
 
 }
