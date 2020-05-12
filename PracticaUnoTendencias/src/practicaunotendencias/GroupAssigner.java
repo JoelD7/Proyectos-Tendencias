@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 public class GroupAssigner {
 
-    //Estudiantes por grupo
+    // Students per group
     private int groupSize;
     private int groupAmount;
-    //Temas por grupo
+    // Topics per group
     private int topicsPerGroup;
     private List<Group> groups;
     private List<String> students;
@@ -26,8 +26,8 @@ public class GroupAssigner {
         groups = new ArrayList<>();
 
         /*
-         * Lee los dos archivos y crea dos listas con el contenido de ellos: una
-         * de estudiantes y otra con los temas.
+         * Reads two files and creates two lists with their contents: one
+         * of students and other of topics.
          */
         try (Stream<String> linesStudents = Files.lines(Paths.get(studentFile));
                 Stream<String> linesTopics = Files.lines(Paths.get(topicsFile))) {
@@ -111,9 +111,9 @@ public class GroupAssigner {
     }
 
     /**
-     * De la lista de estudiantes, toma uno de ellos al azar y lo agrega al
-     * grupo.Una vez dicho estudiante es agregado, este es eliminado de la lista
-     * para evitar que sea agregado a varios grupos.
+     * Of the students list, takes one randomly and adds it to the
+     * group. Once that student is added, the student is deleted of the list
+     * to prevent it from being added to many groups.
      *
      * @param group
      */
@@ -132,9 +132,9 @@ public class GroupAssigner {
     }
 
     /**
-     * De la lista de temas, toma uno de ellos al azar y lo agrega al grupo. Una
-     * vez dicho tema es agregado, este es eliminado de la lista para evitar que
-     * sea agregado a varios grupos.
+     * Of the topics list, takes one randomly and adds it to the
+     * group. Once that topic is added, the topic is deleted of the list
+     * to prevent it from being added to many groups.
      *
      * @param group
      */
@@ -154,8 +154,8 @@ public class GroupAssigner {
     }
 
     /**
-     * Itera sobre el remanente de estudiantes para agregarlos a un grupo
-     * aleatorio.
+     * Iterates over the remainder to group them in a random
+     * group.
      *
      * @param remainderStudents
      */
@@ -175,10 +175,10 @@ public class GroupAssigner {
             String student = students.get(studentToAdd);
             g.getStudents().add(student);
             /*
-             * Al agregar el estudiante remanente al grupo dado, debe indicarse
-             * que este grupo ya contiene un estudiante remanente para prevenir
-             * un desbalance, es decir, que un grupo tenga 7 estudiantes y que
-             * otro tenga 5, por ejemplo.
+             * When the remainder student is added to the given group, needs to be specified
+             * this group already contains a remainder student to prevent
+             * an unbalance, for example, a group having 7 students and other
+             * just 5.
              */
             g.setHasStudentRemainder(true);
 
