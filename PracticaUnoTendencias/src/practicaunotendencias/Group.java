@@ -7,9 +7,9 @@ public class Group {
 
     private List<String> topics;
     private List<String> students;
-    //Indica si el grupo tiene un estudiante adicional a la cantidad base. 
+    //Indicates if the group has one more student than the base quantity.
     private boolean hasStudentRemainder = false;
-    //Indica si el grupo tiene un tema adicional a la cantidad base. 
+    //ndicates if the group has one more topic than the base quantity.
     private boolean hasTopicRemainder = false;
 
     public Group() {

@@ -39,11 +39,15 @@ public class PracticaUnoTendencias {
         List<Group> groups = groupAssigner.groupDivider();
         int i = 1;
         for (Group g : groups) {
-            System.out.printf("\nGRUPO #%d:\n", i);
+            System.out.printf("\nGRUPO #%d:", i);
+            System.out.printf(" Cantidad de estudiantes: %d, Cantidad de temas: %d\n",
+                    g.getStudents().size(), g.getTopics().size());
             System.out.println("Miembros: " + g.getStudents());
             System.out.println("Temas: " + g.getTopics());
             i++;
         }
+        System.out.print("Presione (S) para continuar, o cualquier otra letra para terminar: ");
+
     }
 
     public static void getUserInput() {
